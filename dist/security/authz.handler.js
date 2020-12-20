@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authorize = void 0;
 const restify_errors_1 = require("restify-errors");
-const authorize = (req, resp, next) => {
+exports.authorize = (req, resp, next) => {
     if (req.authenticated !== undefined) {
         next();
     }
@@ -10,4 +10,3 @@ const authorize = (req, resp, next) => {
         next(new restify_errors_1.ForbiddenError('Permission denied'));
     }
 };
-exports.authorize = authorize;

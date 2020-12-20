@@ -5,7 +5,7 @@ const users_model_1 = require("../users/users.model");
 const jwt = require("jsonwebtoken");
 const evironment_1 = require("../common/evironment");
 const restify_errors_1 = require("restify-errors");
-const tokenParser = (req, resp, next) => {
+exports.tokenParser = (req, resp, next) => {
     const token = extractToken(req);
     if (token) {
         jwt.verify(token, evironment_1.environment.security.apiSecret, applyBearer(req, next));
@@ -14,7 +14,6 @@ const tokenParser = (req, resp, next) => {
         next();
     }
 };
-exports.tokenParser = tokenParser;
 function extractToken(req) {
     //Authorization: Bearer token
     let token = undefined;

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateCPF = void 0;
-const validateCPF = (cpf) => {
+exports.validateCPF = (cpf) => {
     let sum, rest;
     if (cpf == undefined || cpf.trim().length === 0 || cpf === "00000000000") {
         return false;
@@ -31,4 +31,3 @@ const validateCPF = (cpf) => {
     }
     return true;
 };
-exports.validateCPF = validateCPF;

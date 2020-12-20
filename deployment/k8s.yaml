@@ -1,0 +1,38 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nfe-api
+  labels:
+    app: nfe-api
+spec:
+  selector:
+    app: nfe-api
+  ports:
+    - port: 3001
+      name: http
+  type: NodePort
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nfe-api
+spec:
+  selector:
+    matchLabels:
+      app: nfe-api
+  replicas: 1
+  template:
+    metadata:
+      annotations: 
+        sidecar.istio.io/inject: "true"      
+      labels:
+        app: nfe-api
+        version: v1
+    spec:
+      containers:
+      - name: nfe-api
+        image: samuelpereiradesouza/nfe-api:1
+        ports:
+        - containerPort: 3001
+      restartPolicy: Always
+---

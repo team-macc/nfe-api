@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handlerError = void 0;
-const handlerError = (req, resp, err, done) => {
+exports.handlerError = (req, resp, err, done) => {
     // err.toJSON=()=>{
     //     return {
     //         message: err.message,
@@ -18,4 +18,3 @@ const handlerError = (req, resp, err, done) => {
     }
     done();
 };
-exports.handlerError = handlerError;

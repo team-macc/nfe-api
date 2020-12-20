@@ -10,7 +10,7 @@ const token_parser_1 = require("../security/token.parser");
 class Server {
     initializeDb() {
         mongoose.Promise = global.Promise;
-        return mongoose.connect(evironment_1.environment.db.url, evironment_1.environment.db.options);
+        return mongoose.connect(evironment_1.environment.db.url, { useNewUrlParser: true, useUnifiedTopology: true });
     }
     iniRoutes(routers) {
         return new Promise((resolve, reject) => {
