@@ -5,6 +5,8 @@ import * as mongoose from 'mongoose'
 import {handlerError} from './error.handler'
 import { mergePatchBodyParser } from './merge-patch.parser'
 import {tokenParser} from '../security/token.parser'
+import * as corsMiddleware from 'restify-cors-middleware2'
+
 
 export class Server{
 
@@ -22,6 +24,19 @@ export class Server{
                     name: 'order-api',
                     version: '1.0.0'                    
                 })
+
+                const corsOptions: corsMiddleware.Options = {
+                    preflightMaxAge: 86400,
+                    origins:['*'],
+                    allowHeaders:['Authorization'],
+                    exposeHeaders:[]
+                }
+
+                const cors: corsMiddleware.CorsMiddleware = corsMiddleware(corsOptions)
+
+                this.application.pre(cors.preflight)
+                
+                this.application.use(cors.actual)
 
                 this.application.use(restify.plugins.queryParser())
                 this.application.use(restify.plugins.bodyParser())
